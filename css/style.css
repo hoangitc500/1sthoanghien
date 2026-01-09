@@ -244,9 +244,22 @@ body::before {
 }
 
 .sub-text {
-    font-size: 1.1rem;
+    font-size: 1.8rem;
+    /* Tăng từ 1.1rem lên 1.8rem cho to rõ */
     color: var(--text-secondary);
     font-style: italic;
+    font-weight: 600;
+    /* Thêm độ đậm một chút để chữ nét hơn */
+    margin-top: 10px;
+    /* Thêm khoảng cách với tên bên trên */
+    font-family: 'Lora', serif;
+    /* Đổi sang font có chân cho sang trọng (tuỳ chọn) */
+}
+
+@media (max-width: 480px) {
+    .sub-text {
+        font-size: 1.4rem;
+    }
 }
 
 .stats {
@@ -325,6 +338,7 @@ body::before {
     border-left: 3px solid var(--text-primary);
     margin-left: 10px;
     padding-left: 30px;
+
 }
 
 .t-item {
@@ -356,6 +370,30 @@ body::before {
     margin: 5px 0;
     font-family: 'Lora', serif;
     font-weight: 700;
+}
+
+.t-image {
+    margin: 10px 0 10px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    /* Giới hạn chiều rộng ảnh để không bị quá to trên màn hình lớn */
+    max-width: 400px;
+    border: 4px solid #fff;
+    /* Tạo viền trắng giống ảnh Polaroid */
+}
+
+.t-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* Hiệu ứng hover nhẹ vào ảnh timeline */
+.t-image:hover img {
+    transform: scale(1.05);
 }
 
 /* GALLERY FIX (Quan trọng để click được) */
@@ -444,4 +482,206 @@ body::before {
     .container {
         padding: 0 20px 80px;
     }
+}
+
+.fancybox__container {
+    z-index: 999999 !important;
+}
+
+/* 2. SỬA LỖI MÀN HÌNH XANH LÈ */
+/* Đổi nền backdrop thành màu đen mờ 85% chuẩn studio */
+.fancybox__backdrop {
+    background: rgba(0, 0, 0, 0.85) !important;
+    /* Không dùng màu xanh nữa */
+}
+
+/* 3. Đảm bảo nội dung ảnh không bị ám màu */
+.fancybox__content {
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+.fancybox__content img {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    /* Thêm viền trắng mỏng và bóng đổ cho ảnh nổi bật trên nền đen */
+    border: 2px solid #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+/* 4. Tùy chỉnh thanh công cụ (Nút đóng, zoom) sang màu trắng cho dễ nhìn */
+.fancybox__toolbar {
+    --f-button-color: #ffffff;
+    /* Màu icon trắng */
+    --f-button-bg: transparent;
+    --f-button-hover-bg: rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 5. Chỉnh màu chữ chú thích ảnh (Caption) */
+.fancybox__caption {
+    color: #ffffff !important;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* --- TỐI ƯU ẢNH TIMELINE --- */
+.t-image {
+    margin: 15px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    /* Viền trắng tạo cảm giác ảnh in */
+    border: 4px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+}
+
+.t-image img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.t-image:hover img {
+    transform: scale(1.03);
+    /* Zoom nhẹ khi di chuột */
+}
+
+/* --- CHỈNH LẠI CHỮ 'KỶ NIỆM 1 NĂM' TO HƠN --- */
+.sub-text {
+    font-size: 1.8rem;
+    /* Tăng kích thước */
+    color: var(--text-secondary);
+    font-style: italic;
+    font-weight: 600;
+    margin-top: 10px;
+    font-family: 'Lora', serif;
+}
+
+/* Mobile thì bé lại xíu */
+@media (max-width: 480px) {
+    .sub-text {
+        font-size: 1.3rem;
+    }
+}
+
+/* --- DÁN VÀO CUỐI FILE style.css --- */
+
+/* 1. Ép khung xem ảnh nằm đè lên TẤT CẢ các thành phần khác */
+.fancybox__container {
+    z-index: 2147483647 !important;
+    /* Số to nhất có thể */
+}
+
+/* 2. Đổi nền backdrop thành màu đen mờ (thay vì xanh) */
+.fancybox__backdrop {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 3. Chỉnh lại khung chứa ảnh cho gọn */
+.fancybox__content {
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+/* 4. Trang trí ảnh khi phóng to (Viền trắng) */
+.fancybox__content img {
+    border: 4px solid #fff;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    max-width: 90vw;
+    /* Không để ảnh tràn màn hình */
+    max-height: 90vh;
+}
+
+/* 5. Đổi màu nút đóng/zoom sang trắng */
+.fancybox__toolbar {
+    --f-button-color: #fff;
+    --f-button-bg: rgba(255, 255, 255, 0.1);
+    --f-button-hover-bg: rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* 6. Chữ chú thích ảnh màu trắng */
+.fancybox__caption {
+    color: #fff !important;
+    font-size: 1.1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* --- FIX LỖI MODAL XEM ẢNH --- */
+
+/* 1. Đảm bảo modal nằm trên cùng (trên cả intro/fixed bar) */
+.fancybox__container {
+    z-index: 20000 !important;
+}
+
+/* 2. Nền đen mờ sang trọng (Thay vì xanh) */
+.fancybox__backdrop {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 3. Chỉnh ảnh nổi bật */
+.fancybox__content img {
+    border: 3px solid #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 4. Caption chữ trắng */
+.fancybox__caption {
+    color: #fff !important;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+}
+
+/* 5. Wrapper cho ảnh (để fix lỗi AOS) */
+.photo-wrapper {
+    margin-bottom: 15px;
+    break-inside: avoid;
+    display: block;
+}
+
+.photo-card {
+    display: block;
+    cursor: zoom-in;
+}
+
+.photo-card img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.photo-card:hover img {
+    transform: scale(1.02);
+}
+
+/* --- FIX VIDEO STYLE --- */
+video {
+    width: 100% !important;
+    /* Ép video full chiều ngang cột */
+    height: auto !important;
+    /* Chiều cao tự động theo tỷ lệ */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng cho đẹp */
+    border: 2px solid #fff;
+    /* Viền trắng giống ảnh */
+    object-fit: cover;
+    /* Lấp đầy khung nếu cần */
+}
+
+/* Chỉnh lại card chứa video */
+.video-card {
+    margin-bottom: 10px;
+    background: #fff;
+    padding: 5px;
+    border-radius: 8px;
 }
