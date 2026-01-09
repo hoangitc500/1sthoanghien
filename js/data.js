@@ -32,12 +32,12 @@ const timelineData = [
 
 /* ALBUM DATA (Giữ nguyên) */
 const albumData = [
-    { src: "assets/images/kethon.mp4", caption: "Đăng ký kết hôn nè"},
+    { src: "assets/images/kethon1.mp4", caption: "Đăng ký kết hôn nè"},
     { src: "assets/images/video.mp4", caption: "Đi Đà Nẵng luôn hẹ hẹ" },
     { src: "assets/images/chupanhcuoi.jpg", caption: "Ảnh cưới nè" },
     { src: "assets/images/chupanhcuoi1.jpg", caption: "Ảnh cưới tiếp nè" },
     { src: "assets/images/quasndau.jpg", caption: "Quà sinh nhật vợ iu tặng anh" },
-    { src: "assets/images/kethon.jpg", caption: "Đăng ký kết hôn nè" },
+    { src: "assets/images/kethon1.jpg", caption: "Đăng ký kết hôn nè" },
     { src: "assets/images/anh1.jpg", caption: "Khoảnh khắc 1" },
     { src: "assets/images/anh2.jpg", caption: "Khoảnh khắc 2" },
     { src: "assets/images/anh3.jpg", caption: "Khoảnh khắc 3" },
