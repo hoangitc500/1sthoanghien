@@ -1,0 +1,447 @@
+/* Import Font: Lora & Nunito */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lora:ital,wght@0,500;0,700;1,400&family=Nunito:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #fdfcf0;
+    --text-primary: #1a472a;
+    --text-secondary: #4d7c5b;
+    --border-color: #d1d5db;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    /* QUAN TRỌNG: Chặn kéo ngang trên mobile */
+    overflow-x: hidden;
+    position: relative;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+}
+
+/* --- TRANG TRÍ GÓC (Thay ảnh lỗi bằng Khung Viền CSS Tinh Tế) --- */
+/* Tạo một khung viền kép bao quanh web, nằm chìm bên dưới */
+body::before {
+    content: "";
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 2px solid rgba(26, 71, 42, 0.2);
+    /* Viền mờ */
+    border-radius: 20px;
+    pointer-events: none;
+    /* Cho phép click xuyên qua */
+    z-index: 0;
+    /* Nằm dưới cùng */
+}
+
+/* Thêm họa tiết góc bằng CSS (Không dùng ảnh ngoài để tránh lỗi) */
+.corner-decor {
+    position: fixed;
+    width: 140px;
+    /* Tăng kích thước lên chút */
+    height: 140px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.8;
+    /* Độ đậm vừa phải */
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* Dùng link ảnh hoa văn góc vintage (xanh rêu) */
+    background-image: url("https://res.cloudinary.com/dvhndjkit/image/upload/v1736418000/corner-floral-green_x9x8a.png");
+    /* Lưu ý: Nếu link ảnh chết, bạn có thể thay bằng link ảnh 'corner floral png' khác */
+}
+
+/* Góc Trái Trên */
+.top-left {
+    top: 0;
+    left: 0;
+    transform: rotate(0deg);
+    /* Giữ nguyên chiều */
+}
+
+/* Góc Phải Dưới (Đối xứng) */
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+    /* Xoay ngược lại */
+}
+
+/* Ẩn 2 góc còn lại cho đỡ rối mắt (Minimalist) */
+.top-right,
+.bottom-left {
+    display: none;
+}
+
+/* --- 2. THANH THÔNG TIN CỐ ĐỊNH (FIXED BAR) --- */
+#fixed-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: rgba(253, 252, 240, 0.9);
+    /* Màu kem pha kính mờ */
+    backdrop-filter: blur(8px);
+    /* Hiệu ứng làm mờ nền sau lưng */
+    border-bottom: 1px solid rgba(26, 71, 42, 0.1);
+    z-index: 998;
+    /* Nằm dưới nút nhạc/BackToTop nhưng trên nội dung */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Mặc định ẩn, JS sẽ kích hoạt hiện ra khi cuộn */
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+#fixed-bar.visible {
+    transform: translateY(0);
+    /* Trượt xuống */
+}
+
+.bar-content {
+    font-family: 'Great Vibes', cursive;
+    /* Font chữ ký */
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-date {
+    font-family: 'Nunito', sans-serif;
+    /* Font số rõ ràng */
+    font-size: 0.9rem;
+    font-weight: 700;
+    background: var(--text-primary);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 20px;
+}
+
+/* Mobile responsive tweak cho bar */
+@media (max-width: 480px) {
+    .corner-decor {
+        width: 100px;
+        height: 100px;
+    }
+
+    .bar-content {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* --- MÀN HÌNH CHỜ (FIX LỆCH) --- */
+#intro {
+    position: fixed;
+    inset: 0;
+    /* Full màn hình */
+    width: 100vw;
+    height: 100vh;
+    /* Ép cứng kích thước */
+    background: var(--bg-color) url("https://www.transparenttextures.com/patterns/cream-paper.png");
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease;
+}
+
+.intro-icon {
+    width: 90px;
+    height: 90px;
+    border: 2px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: var(--text-primary);
+    background: #fff;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    z-index: 10001;
+    /* Nằm trên cùng */
+}
+
+.intro-text {
+    margin-top: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- APP CHÍNH --- */
+#app {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease;
+    position: relative;
+    z-index: 1;
+}
+
+#app.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+    position: relative;
+    z-index: 2;
+    /* Nổi lên trên viền trang trí */
+}
+
+/* CÁC PHẦN KHÁC (Giữ nguyên style bạn thích) */
+.hero {
+    text-align: center;
+    padding: 60px 0 40px;
+}
+
+.wedding-date {
+    display: inline-block;
+    padding: 8px 25px;
+    background: #fff;
+    border: 1px solid var(--text-primary);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.names {
+    font-family: 'Lora', serif;
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.sub-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    /* Dãn đều ra */
+    gap: 10px;
+    /* Giảm khoảng cách chút cho đỡ chật */
+    margin: 40px 0;
+    padding: 20px 15px;
+    /* Giảm padding trái phải */
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+}
+
+.stat-box {
+    text-align: center;
+    flex: 1;
+    /* Để các ô tự chia đều diện tích bằng nhau */
+    min-width: auto;
+    /* Bỏ min-width cũ đi để không bị vỡ giao diện mobile */
+}
+
+/* Chỉnh cỡ chữ số trên mobile bé lại xíu cho vừa 1 hàng */
+@media (max-width: 480px) {
+    .stat-num {
+        font-size: 1.5rem;
+    }
+
+    /* Giảm từ 2rem xuống 1.5rem */
+    .stat-lbl {
+        font-size: 0.7rem;
+    }
+}
+
+.stat-num {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+    color: var(--text-primary);
+}
+
+.stat-lbl {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #6b7280;
+}
+
+.section-head {
+    text-align: center;
+    margin: 60px 0 30px;
+    font-family: 'Lora', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.letter {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(26, 71, 42, 0.1);
+}
+
+.letter p {
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+/* TIMELINE */
+.timeline {
+    border-left: 3px solid var(--text-primary);
+    margin-left: 10px;
+    padding-left: 30px;
+}
+
+.t-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.t-dot {
+    width: 16px;
+    height: 16px;
+    background: var(--bg-color);
+    border: 4px solid var(--text-primary);
+    border-radius: 50%;
+    position: absolute;
+    left: -40px;
+    top: 5px;
+}
+
+.t-time {
+    font-weight: 800;
+    background: #e6f4ea;
+    padding: 2px 10px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.t-title {
+    font-size: 1.3rem;
+    margin: 5px 0;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+}
+
+/* GALLERY FIX (Quan trọng để click được) */
+.masonry {
+    column-count: 2;
+    column-gap: 15px;
+}
+
+.photo-card {
+    margin-bottom: 15px;
+    display: block;
+    break-inside: avoid;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.photo-card img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* NÚT */
+#back-to-top,
+.music-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--text-primary);
+    color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.music-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: #fff;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .names {
+        font-size: 2.8rem;
+    }
+
+    .masonry {
+        column-count: 1;
+    }
+
+    .container {
+        padding: 0 20px 80px;
+    }
+}

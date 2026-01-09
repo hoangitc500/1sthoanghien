@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Việt Hoàng & Vũ Hiền</title>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <div id="fixed-bar">
+        <div class="bar-content">
+            <span class="bar-date">10.01.2025</span>
+            <span>Việt Hoàng</span>
+            <span style="color: #c0392b; font-size: 1rem;">❤</span>
+            <span>Vũ Hiền</span>
+        </div>
+    </div>
+
+    <div id="intro" onclick="startApp()">
+        <div class="intro-icon"><i class="fa-solid fa-heart"></i></div>
+        <p class="intro-text">Mở thiệp kỷ niệm</p>
+    </div>
+
+    <main id="app">
+        <div class="container">
+
+            <section class="hero" data-aos="fade-down">
+                <div class="wedding-date">10 . 01 . 2025</div>
+                <h1 class="names">Việt Hoàng <br>&<br> Vũ Hiền</h1>
+                <p class="sub-text">"Kỷ niệm 1 năm ngày chung đôi"</p>
+            </section>
+
+            <div class="stats" data-aos="zoom-in">
+                <div class="stat-box">
+                    <span class="stat-num" id="days">0</span>
+                    <span class="stat-lbl">Ngày</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num" id="hours">0</span>
+                    <span class="stat-lbl">Giờ</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num" id="minutes">0</span>
+                    <span class="stat-lbl">Phút</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num" id="seconds">0</span>
+                    <span class="stat-lbl">Giây</span>
+                </div>
+            </div>
+
+            <h2 class="section-head">Lời Nhắn</h2>
+            <div class="letter" data-aos="fade-up">
+                <p><b>Gửi vợ yêu,</b><br><br>
+                    Thấm thoát đã một năm trôi qua. Cảm ơn em đã đến bên anh, biến những dòng code khô khan thành bản
+                    tình ca ngọt ngào.<br><br>
+                    Anh hứa sẽ luôn cố gắng, fix mọi "bug" lo âu, update thêm nhiều "tính năng" hạnh phúc cho gia đình
+                    nhỏ của chúng mình.<br><br>
+                    Yêu em!</p>
+            </div>
+
+            <h2 class="section-head">Hành Trình</h2>
+            <div class="timeline" id="timeline-list"></div>
+
+            <h2 class="section-head">Ảnh Kỷ Niệm</h2>
+            <div class="masonry" id="gallery-list"></div>
+
+        </div>
+    </main>
+
+    <div class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></div>
+
+    <div id="back-to-top" onclick="scrollToTop()">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="assets/audio/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
