@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Việt Hoàng & Vũ Hiền</title>
+    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/1a472a/like.png">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
@@ -28,7 +29,8 @@
 
     <div id="intro" onclick="startApp()">
         <div class="intro-icon"><i class="fa-solid fa-heart"></i></div>
-        <p class="intro-text">Chồng có món quà "NHO NHỎ" gửi Vợ nhân ngày kỉ niệm 1 năm. <br> Vợ chọn vào hình trái tim nhé!</p>
+        <p class="intro-text">Chồng có món quà "NHO NHỎ" gửi Vợ nhân ngày kỉ niệm 1 năm. <br> Vợ chọn vào hình trái tim
+            nhé!</p>
     </div>
 
     <main id="app">
@@ -66,12 +68,14 @@
 
                 <p><b>Gửi Vợ iu của anh,</b></p>
                 <p>
-                    Vậy là mình đã đi cùng nhau tròn một năm. Một năm bên em là một năm anh học được cách yêu thương trọn vẹn
+                    Vậy là mình đã đi cùng nhau tròn một năm. Một năm bên em là một năm anh học được cách yêu thương
+                    trọn vẹn
                     hơn mỗi ngày. Cảm ơn em vì đã chọn anh, kiên nhẫn, dịu dàng và luôn ở cạnh anh trong từng khoảnh
                     khắc.
                 </p>
                 <p>
-                    Anh hứa sẽ nắm tay em thật chặt, cùng em đi qua mọi chặng đường phía trước, dù là bình yên hay thử thách.
+                    Anh hứa sẽ nắm tay em thật chặt, cùng em đi qua mọi chặng đường phía trước, dù là bình yên hay thử
+                    thách.
                 </p>
                 <p style="text-align: right; font-weight: bold; margin-top: 20px;">
                     Mãi iu Vợ! <br>
@@ -85,6 +89,24 @@
             <h2 class="section-head">Kỷ Niệm</h2>
             <div class="masonry" id="gallery-list"></div>
 
+            <footer class="footer-section">
+                <p>Made with <span style="color: #c0392b;">❤</span> by <b>Việt Hoàng</b></p>
+
+                <div class="visitor-container">
+                    <div class="visitor-pill">
+                        <span class="visitor-label">
+                            <i class="fa-solid fa-eye"></i> Lượt truy cập:
+                        </span>
+                        <img src="https://visitor-badge.laobi.icu/badge?page_id=hoangitc500.1sthoanghien&right_color=1a472a&left_text=&left_color=ffffff&format=true"
+                            alt="Visitor Count">
+                    </div>
+                </div>
+
+                <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">
+                    © 2026 Kỷ niệm ngày cưới Hoàng và Hiền
+                </p>
+            </footer>
+
         </div>
     </main>
 
@@ -92,6 +114,9 @@
 
     <div id="back-to-top" onclick="scrollToTop()">
         <i class="fa-solid fa-arrow-up"></i>
+    </div>
+    <div id="scroll-down" onclick="scrollToBottom()">
+        <i class="fa-solid fa-arrow-down"></i>
     </div>
 
     <audio id="bg-music" loop>

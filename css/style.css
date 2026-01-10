@@ -424,8 +424,11 @@ body::before {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* NÚT */
+/* --- NÚT ĐIỀU HƯỚNG & NHẠC (ĐÃ CẬP NHẬT GỘP) --- */
+
+/* 1. Cấu hình chung cho cả 3 nút (Tròn, đẹp, hiệu ứng) */
 #back-to-top,
+#scroll-down,
 .music-btn {
     width: 50px;
     height: 50px;
@@ -434,26 +437,56 @@ body::before {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 999;
+    z-index: 998;
+    /* Thấp hơn fancybox tí */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Chuyển động mượt */
 }
 
-#back-to-top {
+/* 2. Vị trí nút Back-Top và Scroll-Down (Nằm đè lên nhau ở góc phải) */
+#back-to-top,
+#scroll-down {
     position: fixed;
     bottom: 30px;
     right: 30px;
     background: var(--text-primary);
     color: #fff;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
 }
 
+/* 3. Trạng thái nút Mũi tên LÊN (Mặc định: ẨN) */
+#back-to-top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    /* Dịch xuống dưới một chút */
+}
+
+/* Khi có class .show thì hiện lên */
 #back-to-top.show {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
 }
 
+/* 4. Trạng thái nút Mũi tên XUỐNG (Mặc định: HIỆN) */
+#scroll-down {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    animation: bounce 2s infinite;
+    /* Nhún nhảy cho sinh động */
+}
+
+/* Khi có class .hide thì ẩn đi */
+#scroll-down.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    /* Bay lên trời khi ẩn */
+}
+
+/* 5. Nút Nhạc (Góc trái - Giữ nguyên) */
 .music-btn {
     position: fixed;
     bottom: 30px;
@@ -461,6 +494,26 @@ body::before {
     background: #fff;
     color: var(--text-primary);
     border: 2px solid var(--text-primary);
+}
+
+/* Hiệu ứng nhún nhảy cho mũi tên xuống */
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
 }
 
 @keyframes pulse {
@@ -691,4 +744,68 @@ video {
     background: #fff;
     padding: 5px;
     border-radius: 8px;
+}
+
+/* --- FOOTER & VIEW COUNTER (Style Viên Thuốc) --- */
+.footer-section {
+    margin-top: 80px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(26, 71, 42, 0.2);
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+.footer-section p {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+/* Tạo khung bao ngoài để căn giữa */
+.visitor-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Style hình viên thuốc (Pill) */
+.visitor-pill {
+    background: #fff;
+    /* Nền trắng */
+    padding: 5px 15px;
+    /* Khoảng cách đệm */
+    border-radius: 50px;
+    /* Bo tròn như viên thuốc */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng nhẹ */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Khoảng cách giữa chữ và số */
+    border: 1px solid rgba(26, 71, 42, 0.1);
+    /* Viền mờ */
+    transition: transform 0.3s ease;
+}
+
+.visitor-pill:hover {
+    transform: translateY(-3px);
+    /* Bay lên nhẹ khi di chuột */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.visitor-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    /* Màu chữ xanh rêu */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.visitor-pill img {
+    height: 20px;
+    display: block;
+    border-radius: 4px;
+    /* Bo góc nhẹ cho cái ảnh số */
 }

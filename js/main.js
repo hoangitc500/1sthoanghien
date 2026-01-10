@@ -102,24 +102,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     }
 
-    // --- 5. FIXED BAR & BACK TO TOP ---
+    // --- 5. FIXED BAR & SMART NAVIGATION (CẬP NHẬT MỚI) ---
     const fixedBar = document.getElementById('fixed-bar');
     const backBtn = document.getElementById('back-to-top');
+    const downBtn = document.getElementById('scroll-down'); // Khai báo nút xuống
 
+    // Xử lý sự kiện cuộn
     window.addEventListener('scroll', () => {
+        // Nếu cuộn xuống quá 300px
         if (window.scrollY > 300) {
-            fixedBar.classList.add('visible');
-            backBtn.classList.add('show');
+            // Hiện thanh menu cố định
+            if (fixedBar) fixedBar.classList.add('visible');
+
+            // Hiện nút Lên - Ẩn nút Xuống
+            if (backBtn) backBtn.classList.add('show');
+            if (downBtn) downBtn.classList.add('hide');
         } else {
-            fixedBar.classList.remove('visible');
-            backBtn.classList.remove('show');
+            // Ẩn thanh menu cố định
+            if (fixedBar) fixedBar.classList.remove('visible');
+
+            // Ẩn nút Lên - Hiện nút Xuống
+            if (backBtn) backBtn.classList.remove('show');
+            if (downBtn) downBtn.classList.remove('hide');
         }
     });
 
+    // Hàm lướt lên đầu trang (Gắn vào nút #back-to-top)
     window.scrollToTop = function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    // Hàm lướt xuống đáy trang (Gắn vào nút #scroll-down)
+    window.scrollToBottom = function () {
+        // Cuộn đến độ cao tối đa của body
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    };
+
+    // Logic nút nhạc (Giữ nguyên)
     window.toggleMusic = function () {
         const audio = document.getElementById('bg-music');
         const icon = document.querySelector('.music-btn i');
