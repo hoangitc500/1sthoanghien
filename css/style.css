@@ -190,8 +190,15 @@ body::before {
     margin-top: 20px;
     font-weight: 700;
     color: var(--text-primary);
-    text-transform: uppercase;
     letter-spacing: 2px;
+
+    /* --- THÊM 3 DÒNG NÀY --- */
+    text-align: center;
+    /* Căn giữa văn bản khi xuống dòng */
+    padding: 0 20px;
+    /* Cách lề trái phải 20px để không dính sát mép */
+    line-height: 1.6;
+    /* Giãn dòng ra một chút cho thoáng và dễ đọc */
 }
 
 /* --- APP CHÍNH --- */

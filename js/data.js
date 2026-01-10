@@ -7,26 +7,74 @@ const timelineData = [
     {
         time: "2023",
         title: "Lần Đầu Gặp Gỡ",
-        image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600", // Thay link ảnh của bạn vào đây
-        desc: "Khoảnh khắc ánh mắt ta chạm nhau tại quán cà phê quen thuộc."
+        image: "",
+        desc: "Vào giao dịch mua gói mạng cũng xịn xò, lúc đấy thích tốc độ cao thật chứ khum phải sĩ gái đâu vợ ạ 🤣! Xong tối hôm đấy về nhắn tin làm quen luôn hẹ hẹ."
+    },
+    {
+        time: "08/2023",
+        title: "Lần đầu tiên tổ chức sinh nhật cho Crush",
+        image: "assets/images/landausnvo.jpg",
+        desc: "Lần đầu tiên tổ chức sinh nhật cho Crush, vừa vui vừa hồi hộp nè!"
     },
     {
         time: "2024",
+        title: "Đi chơi các kiểu",
+        image: "assets/images/mocchau.jpg",
+        desc: "Nhiều lần được đi chơi cùng nhau, Crush xinh dã man, mỗi tội mình chụp xấu nên thỉnh thoảng mới được mấy cái ảnh tạm ổn 😁"
+    },
+    {
+        time: "08/2024",
+        title: "Lần thứ hai tổ chức sinh nhật cho Crush",
+        image: "assets/images/lanhaisnvo.jpg",
+        desc: "Lần thứ hai tổ chức sinh nhật cho Crush nè, lần này có 2 chúng mình đi thui nên cũng hồi hộp ghê!"
+    },
+    {
+        time: "13/10/2024",
         title: "Lời Tỏ Tình",
-        image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600",
-        desc: "Anh lấy hết can đảm để nói yêu em dưới cơn mưa rào mùa hạ."
+        image: "assets/images/totinh.jpg",
+        desc: "Anh lấy hết can đảm để nói yêu em, tỏ tình trong ô tô luôn chớ 😂"
+    },
+    {
+        time: "11/2024",
+        title: "Được em iu tổ chức sinh nhật",
+        image: "assets/images/quasndau.jpg",
+        desc: "Buổi sinh nhật đầu tiên sau khi 2 đứa chính thức đến với tình iu :)"
+    },
+    {
+        time: "12/2024",
+        title: "Đi chụp ảnh cưới 😍",
+        image: "assets/images/chupanhcuoi1.jpg",
+        desc: "Tuyệt vời luôn, mà chồng chưa biết diễn nên cười chưa xinh haha."
+    },
+    {
+        time: "12/2024",
+        title: "Đi đăng ký kết hôn",
+        image: "assets/images/kethon1.jpg",
+        desc: "Cầm tờ A4 đời đời ấm no :)"
+    },
+    {
+        time: "09/01/2025",
+        title: "Chúng mình tổ chức ăn hỏi",
+        image: "assets/images/anhoi.jpg",
+        desc: "Vợ chồng mình xinh xỉu luôn, quá ưng 😘"
     },
     {
         time: "10/01/2025",
-        title: "Lễ Thành Hôn",
-        image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600",
+        title: "Chúng mình chính thức về chung 1 nhà",
+        image: "assets/images/cuoi.jpg",
         desc: "Ngày hạnh phúc nhất đời anh. Chúng ta chính thức về chung một nhà."
+    },
+    {
+        time: "04/2025",
+        title: "Cưới xong thì làm gì nhờ",
+        image: "assets/images/anh4.jpg",
+        desc: "Đi chơi với đi trăng mật chứ còn làm gì nữa, chúng mình cứ thế thui hẹ hẹ 😎"
     },
     {
         time: "10/01/2026",
         title: "Kỷ Niệm 1 Năm",
-        image: "", // Ví dụ mốc này chưa có ảnh thì để trống
-        desc: "365 ngày trọn vẹn yêu thương và sẻ chia."
+        image: "assets/images/anh3.jpg",
+        desc: "1 năm trọn vẹn iu thương!"
     }
 ];
 
