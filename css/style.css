@@ -415,7 +415,8 @@ body::before {
 
 /* GALLERY FIX (Quan trọng để click được) */
 .masonry {
-    column-count: 2;
+    column-count: 4;
+    /* Tăng lên 4 cột để ảnh nhỏ lại */
     column-gap: 15px;
 }
 
@@ -546,7 +547,8 @@ body::before {
     }
 
     .masonry {
-        column-count: 1;
+        column-count: 2;
+        /* Mobile tăng lên 2 cột */
     }
 
     .container {
@@ -932,7 +934,7 @@ video {
     font-size: 1.1rem;
     color: #333;
     line-height: 1.6;
-    font-family: 'Patrick Hand', cursive;
+    /* font-family: 'Patrick Hand', cursive; REMOVED */
     /* Font viết tay nếu có */
 }
 
@@ -1199,7 +1201,7 @@ video {
 }
 
 .map-info h4 {
-    font-family: 'Lora', serif;
+    /* font-family: 'Lora', serif; REMOVED */
     font-size: 1.1rem;
     margin-bottom: 5px;
 }
@@ -1208,6 +1210,25 @@ video {
     font-size: 0.9rem;
     color: #666;
     margin: 0;
+}
+
+
+
+/* Timeline Images (Limit height) */
+.t-image img {
+    width: 100%;
+    max-height: 200px;
+    /* Giới hạn chiều cao ảnh timeline */
+    object-fit: cover;
+    /* Cắt ảnh đẹp */
+    border-radius: 8px;
+    margin-bottom: 5px;
+    cursor: zoom-in;
+    transition: transform 0.3s;
+}
+
+.t-image img:hover {
+    transform: scale(1.02);
 }
 
 @media (max-width: 480px) {
@@ -1220,4 +1241,132 @@ video {
         height: 40px;
         font-size: 1.2rem;
     }
+}
+
+/* =========================================
+   14. 3D FLIPBOOK (ALBUM LẬT TRANG)
+   ========================================= */
+.flipbook-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Tránh tràn layout khi lật */
+}
+
+.flipbook-container {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Tạo không gian cho bóng đổ */
+}
+
+/* Kiểu dáng trang sách */
+.page {
+    background-color: #fdfcf0;
+    border: 1px solid #c2b5a3;
+    overflow: hidden;
+    /* Ảnh không tràn ra ngoài */
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+    /* Bóng đổ bên trong trang */
+}
+
+/* Trang bìa cứng */
+.page.--hard {
+    background-color: #4d7c5b;
+    border: 2px solid #2e4c37;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    /* font-family: 'Lora', serif; REMOVED */
+}
+
+.cover-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ảnh trong trang */
+.page-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+    .flipbook-section {
+        margin-top: 40px !important;
+    }
+}
+
+/* =========================================
+   15. LOADING SCREEN
+   ========================================= */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fdfcf0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out;
+    cursor: pointer;
+    /* Thêm con trỏ tay để biết là ấn được */
+}
+
+.heart-loader {
+    font-size: 3rem;
+    color: #c0392b;
+    animation: heartBeat 1.2s infinite;
+}
+
+.loading-text {
+    margin-top: 15px;
+    /* font-family: 'Patrick Hand', cursive; REMOVED */
+    font-size: 1.2rem;
+    color: #555;
+    letter-spacing: 1px;
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+
+    15% {
+        transform: scale(1.3);
+    }
+
+    30% {
+        transform: scale(1);
+    }
+
+    45% {
+        transform: scale(1.3);
+    }
+
+    60% {
+        transform: scale(1);
+    }
+}
+
+/* Parallax Optimization */
+.hero-bg-container {
+    will-change: transform;
+    /* Tối ưu hiệu suất cho parallax */
 }

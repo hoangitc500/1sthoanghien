@@ -1,26 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- 1. START APP & PHÁT NHẠC ---
-    window.startApp = function () {
-        const intro = document.getElementById('intro');
-        const audio = document.getElementById('bg-music');
-
-        // Hiệu ứng mờ dần
-        intro.style.opacity = 0;
-
-        // Phát nhạc ngay lập tức khi click (User interaction)
-        if (audio) {
-            audio.volume = 0.5;
-            audio.play().catch((e) => console.log("Audio play error:", e));
-        }
-
-        setTimeout(() => {
-            intro.style.display = 'none';
-            document.getElementById('app').classList.add('show');
-            // Khởi tạo AOS cho các phần khác
-            AOS.init({ duration: 1000, once: true });
-        }, 800);
-    };
+    // --- 1. INITIALIZATION HANDLED BY LOADING SCREEN ---
+    // (Old startApp removed)
 
     // --- 2. RENDER TIMELINE (CÓ ẢNH) ---
     const tList = document.getElementById('timeline-list');
@@ -28,7 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let tHtml = '';
         timelineData.forEach(item => {
             // Kiểm tra nếu có ảnh thì hiển thị
-            const imgHtml = item.image ? `<div class="t-image"><img src="${item.image}" loading="lazy" alt="Timeline"></div>` : '';
+            const imgHtml = item.image ? `
+                <div class="t-image">
+                    <a href="${item.image}" data-fancybox="timeline" data-caption="${item.title}">
+                        <img src="${item.image}" loading="lazy" alt="Timeline">
+                    </a>
+                </div>` : '';
 
             tHtml += `
                 <div class="t-item" data-aos="fade-up">
@@ -40,44 +26,68 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>`;
         });
         tList.innerHTML = tHtml;
+
+        // Khởi tạo Fancybox cho Timeline
+        try { Fancybox.bind('[data-fancybox="timeline"]', { Thumbs: false, Toolbar: { display: { right: ["close"] } }, Hash: false }); } catch (e) { }
     }
 
-    // --- 3. RENDER GALLERY (ĐÃ NÂNG CẤP HỖ TRỢ VIDEO) ---
+    // --- 3. RENDER GALLERY (COLLAPSE/EXPAND) ---
     const gList = document.getElementById('gallery-list');
     if (gList && typeof albumData !== 'undefined') {
-        let gHtml = '';
-        albumData.forEach((item, index) => {
-            let contentHtml = '';
+        const initialCount = 6; // Số lượng ảnh hiện ban đầu
+        let isExpanded = false;
 
-            // KIỂM TRA: Nếu đường dẫn kết thúc bằng .mp4 thì hiển thị Video Player
-            if (item.src.toLowerCase().endsWith('.mp4') || (item.type && item.type === 'video')) {
-                contentHtml = `
-                    <div class="photo-card video-card">
-                        <video controls preload="metadata" style="width: 100%; border-radius: 8px; display: block; background: #000;">
-                            <source src="${item.src}#t=0.1" type="video/mp4">
-                            Trình duyệt không hỗ trợ video.
-                        </video>
-                        <div style="text-align: center; font-size: 0.9rem; margin-top: 5px; color: #555; font-style: italic;">
-                            ${item.caption}
+        function renderGallery() {
+            let gHtml = '';
+            // Nếu expanded thì hiện hết, không thì chỉ hiện initialCount
+            const itemsToShow = isExpanded ? albumData : albumData.slice(0, initialCount);
+
+            itemsToShow.forEach((item, index) => {
+                let contentHtml = '';
+                // Video check
+                if (item.src.toLowerCase().endsWith('.mp4') || (item.type && item.type === 'video')) {
+                    contentHtml = `
+                        <div class="photo-card video-card">
+                            <video controls preload="metadata" style="width: 100%; border-radius: 8px; display: block; background: #000;">
+                                <source src="${item.src}#t=0.1" type="video/mp4">
+                            </video>
+                            <div style="text-align: center; font-size: 0.9rem; margin-top: 5px; color: #555;">${item.caption}</div>
                         </div>
-                    </div>
-                `;
-            }
-            // Nếu là Ảnh thì hiển thị như cũ (có Fancybox)
-            else {
-                contentHtml = `
-                    <a href="${item.src}" class="photo-card" data-fancybox="gallery" data-caption="${item.caption}">
-                        <img src="${item.src}" loading="lazy" alt="${item.caption}">
-                    </a>
-                `;
-            }
+                    `;
+                } else {
+                    contentHtml = `
+                        <a href="${item.src}" class="photo-card" data-fancybox="gallery" data-caption="${item.caption}">
+                            <img src="${item.src}" loading="lazy" alt="${item.caption}">
+                        </a>
+                    `;
+                }
 
-            gHtml += `
-                <div class="photo-wrapper" data-aos="zoom-in" data-aos-delay="${(index % 2) * 100}">
-                    ${contentHtml}
-                </div>`;
-        });
-        gList.innerHTML = gHtml;
+                gHtml += `<div class="photo-wrapper" data-aos="zoom-in">${contentHtml}</div>`;
+            });
+
+            gList.innerHTML = gHtml;
+
+            // Xóa nút cũ nếu có
+            const oldBtn = document.getElementById('gallery-toggle-btn');
+            if (oldBtn) oldBtn.remove();
+
+            // Nếu số lượng ảnh thực tế lớn hơn initialCount thì mới hiện nút
+            if (albumData.length > initialCount) {
+                const btn = document.createElement('div');
+                btn.id = 'gallery-toggle-btn';
+                btn.className = 'names sub-text';
+                btn.style.cssText = 'text-align: center; margin-top: 20px; cursor: pointer; text-decoration: underline; font-size: 1.2rem;';
+                btn.innerText = isExpanded ? 'Thu gọn' : 'Xem toàn bộ ảnh';
+                btn.onclick = () => {
+                    isExpanded = !isExpanded;
+                    renderGallery();
+                };
+                // gList.parentNode.appendChild(btn); // CŨ: Thêm vào cuối container (SAI VỊ TRÍ)
+                gList.insertAdjacentElement('afterend', btn); // MỚI: Thêm ngay sau danh sách ảnh
+            }
+        }
+
+        renderGallery();
 
         // Khởi tạo Fancybox cho ảnh
         try { Fancybox.bind('[data-fancybox="gallery"]', { Thumbs: false, Toolbar: { display: { right: ["close"] } }, Hash: false }); } catch (e) { }
@@ -375,28 +385,112 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-    // UPDATE START APP: Thêm khởi chạy tim rơi & typewriter
-    const originalStartApp = window.startApp;
-    window.startApp = function () {
-        originalStartApp(); // Chạy logic cũ
+    // --- 13. 3D FLIPBOOK (ALBUM LẬT TRANG) ---
+    function initFlipbook() {
+        const bookContainer = document.getElementById('flipbook');
+        if (bookContainer && typeof albumData !== 'undefined' && typeof St !== 'undefined') {
+            // 1. Tạo HTML cho các trang
+            let pagesHtml = '';
 
-        // Kích hoạt tính năng mới
-        setTimeout(() => {
-            startFallingHearts();
-            initTypewriter();
-            initSlideshow();
-            initMusicPlayer();
+            // Bìa trước
+            pagesHtml += `
+                <div class="page --hard">
+                    <div class="cover-title">Album Kỷ Niệm</div>
+                    <p>Việt Hoàng & Vũ Hiền</p>
+                    <p>❤</p>
+                </div>
+            `;
 
-            // Nếu nhạc tự chạy thì thêm class playing (trên mobile thường chặn autoplay)
-            const audio = document.getElementById('bg-music');
-            if (audio && !audio.paused) {
-                const btn = document.querySelector('.music-player .mp-play-btn i');
-                if (btn) {
-                    btn.classList.remove('fa-play');
-                    btn.classList.add('fa-pause');
+            // Các trang ảnh (Lọc bỏ video)
+            const images = albumData.filter(item => !item.src.endsWith('.mp4')).slice(0, 10); // Lấy tối đa 10 ảnh
+            images.forEach((img) => {
+                pagesHtml += `
+                    <div class="page">
+                        <img src="${img.src}" class="page-image" loading="lazy" alt="Memories">
+                    </div>
+                `;
+            });
+
+            // Bìa sau
+            pagesHtml += `
+                <div class="page --hard">
+                    <div class="cover-title">The End</div>
+                    <p>Mãi Yêu</p>
+                </div>
+            `;
+
+            bookContainer.innerHTML = pagesHtml;
+
+            // 2. Khởi tạo PageFlip
+            // Đợi một chút để DOM cập nhật
+            setTimeout(() => {
+                const pageFlip = new St.PageFlip(bookContainer, {
+                    width: 500, // Tăng kích thước
+                    height: 700, // Tăng kích thước
+                    size: 'stretch',
+                    minWidth: 300,
+                    maxWidth: 1000,
+                    minHeight: 400,
+                    maxHeight: 1200,
+                    maxShadowOpacity: 0.5,
+                    showCover: true,
+                    mobileScrollSupport: false
+                });
+
+                pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+            }, 500);
+        }
+    }
+
+    // --- 14. LOADING SCREEN LOGIC (Interactive Entry) ---
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        loadingScreen.addEventListener('click', () => {
+            // 1. Ẩn màn hình loading
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+
+                // 2. Hiển thị nội dung chính
+                document.getElementById('app').classList.add('show');
+
+                // 3. Khởi tạo các thư viện & hiệu ứng
+                AOS.init({ duration: 1000, once: true });
+                initTypewriter();
+                initSlideshow();
+                initMusicPlayer();
+                initFlipbook();
+
+                // 4. Bật nhạc
+                const audio = document.getElementById('bg-music');
+                if (audio) {
+                    audio.volume = 0.5;
+                    audio.play().then(() => {
+                        const btn = document.querySelector('.music-player .mp-play-btn i');
+                        if (btn) {
+                            btn.classList.remove('fa-play');
+                            btn.classList.add('fa-pause');
+                        }
+                    }).catch(err => console.log('Autoplay blocked:', err));
                 }
-            }
-        }, 800);
-    };
+
+                // 5. Thả tim
+                startFallingHearts();
+
+            }, 800);
+        });
+    }
+
+    // --- 15. PARALLAX EFFECT (Hiệu ứng cuộn 3D) ---
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const bg = document.getElementById('hero-bg');
+
+        // Chỉ apply hiệu ứng khi còn ở gần Hero section
+        if (bg && scrolled < window.innerHeight) {
+            // Di chuyển nền chậm hơn tốc độ cuộn (tạo chiều sâu)
+            bg.style.transform = `translateY(${scrolled * 0.4}px)`;
+        }
+    });
 
 });
