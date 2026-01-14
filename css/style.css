@@ -42,11 +42,11 @@ body::before {
     bottom: 15px;
     border: 2px solid rgba(26, 71, 42, 0.2);
     /* Viền mờ */
+    /* Nằm trên nội dung nhưng dưới menu/modal */
     border-radius: 20px;
     pointer-events: none;
     /* Cho phép click xuyên qua */
-    z-index: 0;
-    /* Nằm dưới cùng */
+    z-index: 10;
 }
 
 /* Thêm họa tiết góc bằng CSS (Không dùng ảnh ngoài để tránh lỗi) */
@@ -56,7 +56,7 @@ body::before {
     /* Tăng kích thước lên chút */
     height: 140px;
     pointer-events: none;
-    z-index: 0;
+    z-index: 10;
     opacity: 0.8;
     /* Độ đậm vừa phải */
     background-size: contain;
@@ -228,6 +228,14 @@ body::before {
 .hero {
     text-align: center;
     padding: 60px 0 40px;
+    position: relative;
+    /* Để chứa bg-container */
+    min-height: 70vh;
+    /* Tăng chiều cao để ảnh nền to hơn */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .wedding-date {
@@ -248,6 +256,8 @@ body::before {
     margin-bottom: 15px;
     color: var(--text-primary);
     font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+    /* Viền sáng quanh chữ */
 }
 
 .sub-text {
@@ -808,4 +818,406 @@ video {
     display: block;
     border-radius: 4px;
     /* Bo góc nhẹ cho cái ảnh số */
+}
+
+/* =========================================
+   6. FALLING HEARTS
+   ========================================= */
+.heart-fall {
+    position: fixed;
+    top: -10vh;
+    font-size: 1.5rem;
+    color: #e63946;
+    animation: fall linear forwards;
+    z-index: 9999;
+    pointer-events: none;
+    /* Không che chắn click */
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* =========================================
+   7. LOVE BOX (GIFT) & MODAL
+   ========================================= */
+.love-box-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #c0392b;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    animation: floatGift 3s ease-in-out infinite;
+}
+
+.love-box-btn:hover {
+    transform: scale(1.1);
+}
+
+@keyframes floatGift {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Modal Style */
+.love-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 10001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+.love-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    animation: popup 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-image: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+    /* Pattern nhẹ */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.modal-icon {
+    font-size: 3rem;
+    color: #c0392b;
+    margin-bottom: 15px;
+}
+
+.modal-text {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    font-family: 'Patrick Hand', cursive;
+    /* Font viết tay nếu có */
+}
+
+@keyframes popup {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   8. TYPEWRITER EFFECT
+   ========================================= */
+.type-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* =========================================
+   9. MUSIC PULSE
+   ========================================= */
+.music-btn.playing {
+    animation: pulseBorder 1.5s infinite;
+}
+
+@keyframes pulseBorder {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(76, 175, 80, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}
+
+/* =========================================
+   10. CUSTOM SCROLLBAR (MOBILE FRIENDLY)
+   ========================================= */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fdfcf0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4d7c5b;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1a472a;
+}
+
+/* =========================================
+   11. HERO BACKGROUND SLIDESHOW
+   ========================================= */
+.hero-bg-container {
+    position: absolute;
+    top: 20px;
+    /* Cách mép trên */
+    left: 20px;
+    /* Cách mép trái */
+    width: calc(100% - 40px);
+    /* Trừ margin */
+    height: calc(100% - 40px);
+    /* Trừ margin */
+    z-index: -1;
+    overflow: hidden;
+    border-radius: 30px;
+    /* Bo tròn góc theo yêu cầu */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Thêm bóng đổ cho đẹp */
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    /* Hiển thị ảnh đang active */
+}
+
+/* Lớp phủ làm mờ ảnh nền để dễ đọc chữ (All Devices) */
+.hero-bg-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(253, 252, 240, 0.65);
+    /* Màu kem pha trong suốt */
+    z-index: 1;
+}
+
+/* Mobile: Làm mờ đậm hơn chút */
+@media (max-width: 480px) {
+    .hero-bg-container::after {
+        background: rgba(253, 252, 240, 0.8);
+    }
+}
+
+/* =========================================
+   12. FLOATING MUSIC PLAYER (MINIMALIST)
+   ========================================= */
+.music-player {
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    /* Mobile: Cách lề ít hơn */
+    width: 300px;
+    max-width: calc(100vw - 120px);
+    /* Để tránh đè nút BackTop/Gift */
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(26, 71, 42, 0.1);
+    transition: all 0.3s;
+}
+
+/* Ẩn player đi, chỉ hiện nút tròn nhỏ nếu cần (tùy chọn) 
+   nhưng ở đây ta làm player luôn hiện */
+
+.mp-play-btn {
+    width: 35px;
+    height: 35px;
+    background: var(--text-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.mp-info {
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.mp-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+}
+
+.mp-progress-container {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    margin-top: 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+.mp-progress-bar {
+    height: 100%;
+    background: var(--text-secondary);
+    width: 0%;
+    border-radius: 2px;
+}
+
+@media (max-width: 480px) {
+    .music-player {
+        bottom: 20px;
+        left: 10px;
+        padding: 8px 12px;
+    }
+
+    .mp-title {
+        font-size: 0.75rem;
+    }
+}
+
+/* =========================================
+   13. LOVE MAP (DẤU ẤN TÌNH YÊU)
+   ========================================= */
+.love-map {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.map-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(26, 71, 42, 0.1);
+    transition: transform 0.3s;
+}
+
+.map-card:hover {
+    transform: translateY(-5px);
+}
+
+.map-icon {
+    width: 50px;
+    height: 50px;
+    background: #ffebee;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #c0392b;
+    flex-shrink: 0;
+}
+
+.map-info h4 {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.map-info p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .map-card {
+        padding: 12px;
+    }
+
+    .map-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
 }

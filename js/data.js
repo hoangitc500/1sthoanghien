@@ -80,7 +80,7 @@ const timelineData = [
 
 /* ALBUM DATA (Giữ nguyên) */
 const albumData = [
-    { src: "assets/images/kethon1.mp4", caption: "Đăng ký kết hôn nè"},
+    { src: "assets/images/kethon1.mp4", caption: "Đăng ký kết hôn nè" },
     { src: "assets/images/video.mp4", caption: "Đi Đà Nẵng luôn hẹ hẹ" },
     { src: "assets/images/chupanhcuoi.jpg", caption: "Ảnh cưới nè" },
     { src: "assets/images/chupanhcuoi1.jpg", caption: "Ảnh cưới tiếp nè" },
@@ -96,4 +96,43 @@ const albumData = [
     { src: "assets/images/anh8.jpg", caption: "Khoảnh khắc 8" },
     { src: "assets/images/anh9.jpg", caption: "Khoảnh khắc 9" },
     { src: "assets/images/anh10.jpg", caption: "Khoảnh khắc 10" }
+];
+
+/* LOVE BOX DATA (MỚI) */
+const loveMessages = [
+    "Cảm ơn em đã đến bên anh!",
+    "Mỗi ngày bên em là một niềm vui.",
+    "Vợ anh là xinh nhất!",
+    "Yêu em nhiều hơn hôm qua, ít hơn ngày mai.",
+    "Em là món quà tuyệt vời nhất của anh.",
+    "Bữa cơm em nấu là ngon nhất trên đời!",
+    "Cùng nhau đi hết cuộc đời nhé!",
+    "Anh hứa sẽ luôn lắng nghe em.",
+    "Cảm ơn em đã chịu đựng tính xấu của anh hehe.",
+    "Hôm nay em đẹp lắm!",
+    "Anh nhớ em!",
+    "Vợ là số 1!",
+    "Hạnh phúc là có em bên cạnh.",
+    "Yêu em 3000!",
+    "Em cười là anh vui rồi.",
+    "Mãi bên nhau bạn nhé!"
+];
+
+/* LOVE MAP DATA (MỚI) */
+const locationData = [
+    {
+        name: "Lần đầu gặp gỡ",
+        desc: "Nơi định mệnh bắt đầu...",
+        icon: "fa-map-marker-alt"
+    },
+    {
+        name: "Nơi tỏ tình",
+        desc: "Một góc đường đầy kỷ niệm",
+        icon: "fa-heart"
+    },
+    {
+        name: "Lễ Ăn Hỏi & Cưới",
+        desc: "Ngày mình về chung một nhà",
+        icon: "fa-church"
+    }
 ];

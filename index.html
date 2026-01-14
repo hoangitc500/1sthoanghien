@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
@@ -37,6 +39,7 @@
         <div class="container">
 
             <section class="hero" data-aos="fade-down">
+                <div class="hero-bg-container" id="hero-bg"></div>
                 <div class="wedding-date">10 . 01 . 2025</div>
                 <h1 class="names">Việt Hoàng <br>&<br> Vũ Hiền</h1>
                 <p class="sub-text">"Kỷ niệm 1 năm ngày chung đôi"</p>
@@ -67,13 +70,13 @@
                     style="font-size: 2rem; color: #e6f4ea; position: absolute; top: 20px; left: 20px;"></i>
 
                 <p><b>Gửi Vợ iu của anh,</b></p>
-                <p>
+                <p id="letter-p1">
                     Vậy là mình đã đi cùng nhau tròn một năm. Một năm bên em là một năm anh học được cách yêu thương
                     trọn vẹn
                     hơn mỗi ngày. Cảm ơn em vì đã chọn anh, kiên nhẫn, dịu dàng và luôn ở cạnh anh trong từng khoảnh
                     khắc.
                 </p>
-                <p>
+                <p id="letter-p2">
                     Anh hứa sẽ nắm tay em thật chặt, cùng em đi qua mọi chặng đường phía trước, dù là bình yên hay thử
                     thách.
                 </p>
@@ -85,6 +88,9 @@
 
             <h2 class="section-head">Hành Trình</h2>
             <div class="timeline" id="timeline-list"></div>
+
+            <h2 class="section-head">Dấu Ấn Tình Yêu</h2>
+            <div class="love-map" id="love-map"></div>
 
             <h2 class="section-head">Kỷ Niệm</h2>
             <div class="masonry" id="gallery-list"></div>
@@ -110,13 +116,38 @@
         </div>
     </main>
 
-    <div class="music-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></div>
+    <!-- NEW MUSIC PLAYER -->
+    <div id="music-player" class="music-player">
+        <div class="mp-play-btn" onclick="toggleMusic()">
+            <i class="fa-solid fa-play"></i>
+        </div>
+        <div class="mp-info">
+            <div class="mp-title">Nhạc tình iu nè!</div>
+            <div class="mp-progress-container" id="mp-progress-container">
+                <div class="mp-progress-bar" id="mp-progress-bar"></div>
+            </div>
+        </div>
+    </div>
 
     <div id="back-to-top" onclick="scrollToTop()">
         <i class="fa-solid fa-arrow-up"></i>
     </div>
     <div id="scroll-down" onclick="scrollToBottom()">
         <i class="fa-solid fa-arrow-down"></i>
+    </div>
+
+    <!-- LOVE BOX BUTTON -->
+    <div class="love-box-btn" onclick="openLoveBox()">
+        <i class="fa-solid fa-gift"></i>
+    </div>
+
+    <!-- LOVE BOX MODAL -->
+    <div id="love-modal" class="love-modal" onclick="closeLoveBox()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeLoveBox()">&times;</span>
+            <div class="modal-icon"><i class="fa-solid fa-heart"></i></div>
+            <div class="modal-text" id="love-message">...</div>
+        </div>
     </div>
 
     <audio id="bg-music" loop>
